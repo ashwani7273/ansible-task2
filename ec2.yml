@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars_files:
+        - iam.yml
+  gather_facts: false
+  tasks:
+  - name: launching AWS instance using Ansible
+    ec2:
+        key_name: key
+        instance_type: t2.micro
+        image: ami-08e0ca9924195beba
+        region: ap-south-1
+        wait: yes
+        group_id: sg-0b4d3fe6d1c3f9a04
+        count: 1
+        instance_tags:
+                Name: Ansible-Test
+        vpc_subnet_id: subnet-4e083226
+        assign_public_ip: yes
+        aws_access_key: "{{ aws_access_key  }}"
+        aws_secret_key: "{{ aws_secret_key  }}"
+    register: X
+
+  - debug:
+
+      var: X.instances[0].public_ip
