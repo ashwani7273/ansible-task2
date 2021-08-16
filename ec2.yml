@@ -3,7 +3,7 @@
         - iam.yml
   gather_facts: false
   tasks:
-  - name: launching AWS instance using Ansible
+  - name: launching AWS instance using Ansible 
     ec2:
         key_name: key
         instance_type: t2.micro
